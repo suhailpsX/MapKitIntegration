@@ -9,7 +9,7 @@ import CoreLocation
 import MapKit
 
 class HomeViewModel: NSObject, CLLocationManagerDelegate {
-    private(set) var tasks: [Task] = []
+    private(set) var tasks: [User] = []
     var userLocation: CLLocationCoordinate2D?
     var onTasksUpdated: (() -> Void)?
     var onLocationUpdated: (() -> Void)?
@@ -39,7 +39,7 @@ class HomeViewModel: NSObject, CLLocationManagerDelegate {
     }
 
     func addTask(title: String, description: String, location: CLLocationCoordinate2D) {
-        let newTask = Task(title: title, description: description, location: location)
+        let newTask = User(title: title, description: description, location: location)
         tasks.append(newTask)
         saveTasksLocally()
         print("Task added: \(title)")
@@ -58,7 +58,7 @@ class HomeViewModel: NSObject, CLLocationManagerDelegate {
 
     func loadTasks() {
         if let data = UserDefaults.standard.data(forKey: "tasks"),
-           let savedTasks = try? JSONDecoder().decode([Task].self, from: data) {
+           let savedTasks = try? JSONDecoder().decode([User].self, from: data) {
             self.tasks = savedTasks
             print("Tasks loaded: \(tasks.count)")
             onTasksUpdated?()

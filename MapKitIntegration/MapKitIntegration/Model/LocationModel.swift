@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-struct Task: Codable {
+struct User: Codable {
     let title: String
     let description: String
     let location: CLLocationCoordinate2D

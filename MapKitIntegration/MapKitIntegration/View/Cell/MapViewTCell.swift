@@ -10,7 +10,7 @@ import MapKit
 
 protocol MapViewTCellDelegate {
     func didLongPress(location: CLLocationCoordinate2D)
-    func didSelectAnnotation(task: Task)
+    func didSelectAnnotation(task: User)
 }
 
 class MapViewTCell: UITableViewCell {
@@ -33,7 +33,10 @@ class MapViewTCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-
+    @IBAction func recentretap(_ sender: Any) {
+        recenterMap()
+    }
+    
 }
 
 extension MapViewTCell: MKMapViewDelegate {
@@ -72,7 +75,7 @@ extension MapViewTCell: MKMapViewDelegate {
               let title = annotation.title,
               let subtitle = annotation.subtitle else { return }
 
-        let task = Task(title: title ?? "", description: subtitle ?? "", location: annotation.coordinate)
+        let task = User(title: title ?? "", description: subtitle ?? "", location: annotation.coordinate)
         cellDelegate?.didSelectAnnotation(task: task)
     }
 
