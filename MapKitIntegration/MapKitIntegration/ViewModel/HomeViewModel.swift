@@ -13,41 +13,35 @@ class HomeViewModel: NSObject, CLLocationManagerDelegate {
     var userLocation: CLLocationCoordinate2D?
     var onTasksUpdated: (() -> Void)?
     var onLocationUpdated: (() -> Void)?
-    private var locationManager: CLLocationManager = CLLocationManager()
+    private let locationManager = CLLocationManager()
 
     override init() {
         super.init()
-        setupLocationManager()
+        configureLocationManager()
     }
 
-    private func setupLocationManager() {
+    private func configureLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
-        print("Location Manager started")
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.first else {
-            print("No location received")
-            return
-        }
+        guard let location = locations.first else { return }
         userLocation = location.coordinate
-        print("User Location Updated: \(location.coordinate)")
         onLocationUpdated?()
     }
 
     func addTask(title: String, description: String, location: CLLocationCoordinate2D) {
         let newTask = User(title: title, description: description, location: location)
         tasks.append(newTask)
-        saveTasksLocally()
-        print("Task added: \(title)")
+        saveTasksToStorage()
         onTasksUpdated?()
     }
 
-    func getTaskAnnotations() -> [MKAnnotation] {
-        return tasks.map { task in
+    func getTaskAnnotations() -> [MKPointAnnotation] {
+        tasks.map { task in
             let annotation = MKPointAnnotation()
             annotation.coordinate = task.location
             annotation.title = task.title
@@ -56,16 +50,15 @@ class HomeViewModel: NSObject, CLLocationManagerDelegate {
         }
     }
 
-    func loadTasks() {
+    func loadTasksFromStorage() {
         if let data = UserDefaults.standard.data(forKey: "tasks"),
            let savedTasks = try? JSONDecoder().decode([User].self, from: data) {
-            self.tasks = savedTasks
-            print("Tasks loaded: \(tasks.count)")
+            tasks = savedTasks
             onTasksUpdated?()
         }
     }
 
-    private func saveTasksLocally() {
+    private func saveTasksToStorage() {
         if let data = try? JSONEncoder().encode(tasks) {
             UserDefaults.standard.set(data, forKey: "tasks")
         }

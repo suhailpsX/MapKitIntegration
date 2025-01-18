@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="a3C-y3-O9J">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="a3C-y3-O9J">
                                 <rect key="frame" x="0.0" y="59" width="393" height="659"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -38,10 +38,9 @@
                                                             <standardMapConfiguration key="preferredConfiguration"/>
                                                         </mapView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="awb-Xd-sV0">
-                                                            <rect key="frame" x="51.666666666666686" y="253" width="250" height="50"/>
+                                                            <rect key="frame" x="20" y="253" width="313" height="50"/>
                                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="250" id="9Te-g4-WtR"/>
                                                                 <constraint firstAttribute="height" constant="50" id="YF2-c7-Ko8"/>
                                                             </constraints>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -54,6 +53,8 @@
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="LKo-ME-Duj" secondAttribute="trailing" id="7am-j9-mSP"/>
                                                         <constraint firstItem="LKo-ME-Duj" firstAttribute="leading" secondItem="QOF-Dz-tRE" secondAttribute="leading" id="AgB-XU-He2"/>
+                                                        <constraint firstItem="awb-Xd-sV0" firstAttribute="leading" secondItem="QOF-Dz-tRE" secondAttribute="leading" constant="20" id="DG7-MG-BdK"/>
+                                                        <constraint firstAttribute="trailing" secondItem="awb-Xd-sV0" secondAttribute="trailing" constant="20" id="XJC-Jy-BdT"/>
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
@@ -130,12 +131,12 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="View list"/>
                                 <connections>
-                                    <action selector="viewListButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="apA-3y-h5B"/>
+                                    <action selector="toggleViewButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vVF-BM-Br2"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemCyanColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="a3C-y3-O9J" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="0eD-EK-2bz"/>
                             <constraint firstItem="a3C-y3-O9J" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="7Ok-ha-b9r"/>
@@ -149,7 +150,7 @@
                     </view>
                     <connections>
                         <outlet property="mapTableView" destination="a3C-y3-O9J" id="beL-Fp-m07"/>
-                        <outlet property="viewListButton" destination="3vS-nt-khK" id="rZR-4B-6rN"/>
+                        <outlet property="toggleViewButton" destination="3vS-nt-khK" id="DOn-u7-oTN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -163,9 +164,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemCyanColor">
-            <color red="0.1960784314" green="0.67843137249999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
