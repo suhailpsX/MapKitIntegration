@@ -49,13 +49,13 @@ class MapViewTCell: UITableViewCell {
     func configureMap(centerCoordinate: CLLocationCoordinate2D, annotations: [MKAnnotation]) {
         mapView.removeAnnotations(mapView.annotations)
         mapView.addAnnotations(annotations)
-        let region = MKCoordinateRegion(center: centerCoordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        let region = MKCoordinateRegion(center: centerCoordinate, latitudinalMeters: 800, longitudinalMeters: 800)
         mapView.setRegion(region, animated: true)
     }
 
     private func recenterMapToUserLocation() {
         guard let userLocation = mapView.userLocation.location else { return }
-        let region = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        let region = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 800, longitudinalMeters: 800)
         mapView.setRegion(region, animated: true)
     }
 }

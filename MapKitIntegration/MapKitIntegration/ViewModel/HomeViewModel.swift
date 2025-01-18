@@ -51,7 +51,7 @@ class HomeViewModel: NSObject, CLLocationManagerDelegate {
     }
 
     func loadTasksFromStorage() {
-        if let data = UserDefaults.standard.data(forKey: "tasks"),
+        if let data = UserDefaults.standard.data(forKey: "userData"),
            let savedTasks = try? JSONDecoder().decode([User].self, from: data) {
             tasks = savedTasks
             onTasksUpdated?()
@@ -60,7 +60,7 @@ class HomeViewModel: NSObject, CLLocationManagerDelegate {
 
     private func saveTasksToStorage() {
         if let data = try? JSONEncoder().encode(tasks) {
-            UserDefaults.standard.set(data, forKey: "tasks")
+            UserDefaults.standard.set(data, forKey: "userData")
         }
     }
 }
